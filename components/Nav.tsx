@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { handleSignOut, useAuth } from '../utils/authHelpers';
+import { Github } from '../utils/icons';
 
 export default function Nav() {
   const { userName, userImage } = useAuth()
@@ -7,16 +8,20 @@ export default function Nav() {
   return (
     <div className="max-w-[1400px] mx-auto px-2 sm:px-4 lg:px-8">
       <div className="relative h-16 flex items-center justify-between lg:border-b lg:border-indigo-400 lg:border-opacity-25">
+        <div className='flex space-x-4'>
+          <Image
+            src="/logo.svg"
+            alt="Logo"
+            width={32}
+            height={32}
+          />
+        </div>
+        <div className='flex space-x-4'>
+          <a className='self-center' target="_blank" href='https://github.com/prnvbirajdar/react-table' rel="noreferrer">          
+            <Github />
+          </a>
 
-        <Image
-          src="/logo.svg"
-          alt="Logo"
-          width={32}
-          height={32}
-        />
-
-        <div className='flex space-x-3'>
-          <p className='text-white self-center mr-4'>
+          <p className='text-white self-center pr-2'>
             {userName}
           </p>
 
