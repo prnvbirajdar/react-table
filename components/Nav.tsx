@@ -15,12 +15,12 @@ export default function Nav() {
             width={32}
             height={32}
           />
-        </div>
-        <div className='flex space-x-4'>
           <a className='self-center text-white' target="_blank" href='https://github.com/prnvbirajdar/react-table' rel="noreferrer">          
-            <Github />
+            Repo
           </a>
 
+        </div>
+        <div className='flex space-x-2'>
           <p className='text-white self-center pr-2'>
             {userName}
           </p>
