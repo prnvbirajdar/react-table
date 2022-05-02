@@ -1,15 +1,17 @@
 /* eslint-disable react/jsx-key */
-import { useMemo, useCallback, useState, useEffect, DragEvent, SetStateAction } from 'react'
+import { useMemo, useCallback, useState } from 'react'
 import initialColumns from './Columns'
-import { useTable, useSortBy, useBlockLayout, useColumnOrder, HeaderGroup } from 'react-table'
+import { useTable, useSortBy, useBlockLayout, useColumnOrder } from 'react-table'
 import { FixedSizeList } from 'react-window'
 import scrollbarWidth from '../utils/scrollbarWidth';
 import { ArrowDown, ArrowUp } from '../utils/icons'
 import TableLayout from './Layout/TableLayout'
-import useLocalData from '../utils/useLocalData'
-// import { User } from '../utils/useLocalData'
+import useLocalData, { handleSave, handleLoad } from '../utils/useLocalData'
+import { Toaster } from 'react-hot-toast';
+import TableHeaderLayout from './Layout/TableHeaderLayout'
+import { LoadColumnButton, SaveColumnButton } from './SaveColumnButton'
 
-const DataTableJS = () => {
+const DataTable = () => {
   // get data from localStorage
   const { data } = useLocalData()
 
@@ -95,40 +97,12 @@ const DataTableJS = () => {
     [prepareRow, rows]
   )
 
-  // loads columnOrder from localStorage
-  const handleLoad = () => {
-    const data = JSON.parse(localStorage.getItem('columnOrder'))
-
-    // function compares the saved column order to the current column order
-    function sortFunc(a, b) {
-      var sortingArr = data
-      return sortingArr.indexOf(a.Header) - sortingArr.indexOf(b.Header);
-    }
-
-    const newCol = columns.sort(sortFunc);
-
-    if (data) {
-      return setColumns([...newCol])
-    }
-  }
-
-  // saves column order to localStorage
-  const handleSave = () => localStorage.setItem('columnOrder', JSON.stringify(state.columnOrder))
-
   return (
     <>
-      <div className="flex justify-between">
-        <h1 className="text-2xl self-center lg:text-3xl font-bold text-indigo-800">Dashboard</h1>
-
-        <div className='space-x-4'>
-          <button onClick={handleSave} className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
-            Save
-          </button>
-          <button onClick={handleLoad} className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
-            Load
-          </button>
-        </div>
-      </div>
+      <TableHeaderLayout>
+        <SaveColumnButton columnOrder={state.columnOrder} />
+        <LoadColumnButton columns={columns} setColumns={setColumns} />
+      </TableHeaderLayout>
 
       <TableLayout>
         <div {...getTableProps()} className="min-w-full divide-y">
@@ -166,4 +140,4 @@ const DataTableJS = () => {
   )
 }
 
-export default DataTableJS;
+export default DataTable;
