@@ -2,20 +2,25 @@ import { useEffect, useMemo, useState } from 'react'
 import ioc_data from '../data/ioc.json'
 
 // data model
-type User = {
-  id: number
-  first_name: string
-  last_name: string
-  email: string
-  city: string
-  registered_at: string
+type User = { 
+  ID: number 
+  First_Name: string 
+  Last_Name: string 
+  Email: string 
+  City: string 
+  Registered_Date: string 
 }
 
 export default function useLocalData() {
-  const [iocData, setIocData] = useState([])
-  
   // memoize the data
-  const data: User[] = useMemo(() => iocData, [iocData])
+  const data = useMemo(() => ioc_data, [])
+
+  const [iocData, setIocData] = useState(data as User[])
+
+  // save the data
+  useEffect(() => {
+    localStorage.setItem('iocData', JSON.stringify(iocData))
+  }, [iocData])
 
   // load the data
   useEffect(() => {
@@ -24,11 +29,6 @@ export default function useLocalData() {
     if (data) {
       setIocData(data)
     }
-  }, [])
-
-  // save the data
-  useEffect(() => {
-    localStorage.setItem('iocData', JSON.stringify(ioc_data))
   }, [])
 
   return { data }
