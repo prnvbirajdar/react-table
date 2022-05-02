@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { handleSignOut, useAuth } from '../utils/authHelpers';
-import { Github } from '../utils/icons';
 
 export default function Nav() {
   const { userName, userImage } = useAuth()
