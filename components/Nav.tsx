@@ -17,7 +17,7 @@ export default function Nav() {
           />
         </div>
         <div className='flex space-x-4'>
-          <a className='self-center' target="_blank" href='https://github.com/prnvbirajdar/react-table' rel="noreferrer">          
+          <a className='self-center text-white' target="_blank" href='https://github.com/prnvbirajdar/react-table' rel="noreferrer">          
             <Github />
           </a>
 
