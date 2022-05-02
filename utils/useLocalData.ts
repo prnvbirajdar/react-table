@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import ioc_data from '../data/ioc.json'
 
 // data model
-export type User = {
+type User = {
   id: number
   first_name: string
   last_name: string
@@ -33,3 +33,5 @@ export default function useLocalData() {
 
   return { data }
 }
+
+export type { User }
