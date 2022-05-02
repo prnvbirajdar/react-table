@@ -7,7 +7,7 @@ import scrollbarWidth from '../utils/scrollbarWidth';
 import { ArrowDown, ArrowUp } from '../utils/icons'
 import TableLayout from './Layout/TableLayout'
 import useLocalData from '../utils/useLocalData'
-import { User }from '../utils/useLocalData'
+import { User } from '../utils/useLocalData'
 
 const DataTable = () => {
   // get data from localStorage
@@ -21,26 +21,6 @@ const DataTable = () => {
   const [currentColumn, setCurrentColumn] = useState(null);
 
   const scrollBarSize = useMemo(() => scrollbarWidth(), [])
-
-  // loads columnOrder from localStorage
-  const handleLoad = () => {
-    const data = JSON.parse(localStorage.getItem('columnOrder')!)
-
-    // function compares the saved column order to the current column order
-    function sortFunc(a: { Header: string }, b: { Header: string }) {
-      var sortingArr = data
-      return sortingArr.indexOf(a.Header) - sortingArr.indexOf(b.Header);
-    }
-
-    const newCol = columns.sort(sortFunc);
-
-    if (data) {
-      return setColumns([...newCol])
-    }
-  }
-
-  // saves column order to localStorage
-  const handleSave = () => localStorage.setItem('columnOrder', JSON.stringify(state.columnOrder))
 
   // setting width of table
   const defaultColumn = useMemo(
@@ -73,6 +53,9 @@ const DataTable = () => {
     useSortBy,
     useColumnOrder
   )
+
+
+  console.log(state);
 
   //  drag and drop functionality
   function dragEnterHandler(e: DragEvent<HTMLElement>, column: HeaderGroup<User> | null) {
@@ -114,6 +97,26 @@ const DataTable = () => {
     },
     [prepareRow, rows]
   )
+
+  // loads columnOrder from localStorage
+  const handleLoad = () => {
+    const data = JSON.parse(localStorage.getItem('columnOrder')!)
+
+    // function compares the saved column order to the current column order
+    function sortFunc(a: { Header: string }, b: { Header: string }) {
+      var sortingArr = data
+      return sortingArr.indexOf(a.Header) - sortingArr.indexOf(b.Header);
+    }
+
+    const newCol = columns.sort(sortFunc);
+
+    if (data) {
+      return setColumns([...newCol])
+    }
+  }
+
+  // saves column order to localStorage
+  const handleSave = () => localStorage.setItem('columnOrder', JSON.stringify(state.columnOrder))
 
   return (
     <>
