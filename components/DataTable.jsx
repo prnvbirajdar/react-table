@@ -3,7 +3,6 @@ import { useMemo, useCallback, useState } from 'react'
 import initialColumns from './Columns'
 import { useTable, useSortBy, useBlockLayout, useColumnOrder } from 'react-table'
 import { FixedSizeList } from 'react-window'
-import scrollbarWidth from '../utils/scrollbarWidth';
 import { ArrowDown, ArrowUp } from '../utils/icons'
 import TableLayout from './Layout/TableLayout'
 import useLocalData from '../utils/useLocalData'
@@ -20,8 +19,6 @@ const DataTable = () => {
 
   // keep track of the column order while dragging
   const [currentColumn, setCurrentColumn] = useState(null);
-
-  const scrollBarSize = useMemo(() => scrollbarWidth(), [])
 
   // setting width of table
   const defaultColumn = useMemo(
@@ -128,7 +125,7 @@ const DataTable = () => {
               height={1000}
               itemCount={rows.length}
               itemSize={50}
-              width={totalColumnsWidth + scrollBarSize}
+              width={totalColumnsWidth}
             >
               {RenderRow}
             </FixedSizeList>

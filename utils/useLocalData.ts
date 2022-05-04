@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import ioc_data from '../data/ioc.json'
-import { columnSaved, columnLoaded } from './toastHelpers'
+import toast from 'react-hot-toast';
 
 // data model
 type User = {
@@ -37,7 +37,8 @@ export default function useLocalData() {
 
 // saves column order to localStorage
 const handleSave = (columnOrder: string[]) => {
-  columnSaved()
+  // toast notification
+  toast('Column order saved!')
   localStorage.setItem('columnOrder', JSON.stringify(columnOrder))
 }
 
@@ -54,7 +55,8 @@ const handleLoad = (cols: { Header: string }[], colsFunc: ((arg0: any[]) => any)
   const newCol = cols.sort(sortFunc);
 
   if (data) {
-    columnLoaded()
+    // toast notification
+    toast('Column order loaded!')
     return colsFunc([...newCol])
   }
 }

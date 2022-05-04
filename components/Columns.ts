@@ -3,13 +3,13 @@ import { format, formatDistance } from 'date-fns';
 const initialColumns =  [
   {
     Header: 'ID',
+    accessor: (props: { ID: number }) => props.ID,
     width: 50,
-    accessor: (props: { ID: number }) => props.ID
   },
   {
     Header: 'First_Name',
-    width: 130,
-    accessor: (props: { First_Name: string }) => props.First_Name
+    accessor: (props: { First_Name: string }) => props.First_Name,
+    width: 130
   },
   {
     Header: 'Last_Name',
@@ -17,14 +17,13 @@ const initialColumns =  [
   },
   {
     Header: 'Full_Name',
-    width: 200,
-    accessor: (props: { First_Name: string; Last_Name: string; }) => props.First_Name + ' ' + props.Last_Name
+    accessor: (props: { First_Name: string; Last_Name: string; }) => props.First_Name + ' ' + props.Last_Name,
+    width: 200
   },
   {
     Header: 'Email',
+    accessor: (props: { Email: string }) => props.Email,
     width: 275,
-    accessor: (props: { Email: string }) => props.Email
-
   },
   {
     Header: 'City',
@@ -32,8 +31,8 @@ const initialColumns =  [
   },
   {
     Header: 'Registered_Date',
-    width: 175,
-    accessor: (props: { Registered_Date: Date; }) => format(new Date(props.Registered_Date), 'dd MMM, yyyy')
+    accessor: (props: { Registered_Date: Date; }) => format(new Date(props.Registered_Date), 'dd MMM, yyyy'),
+    width: 175
   },
   {
     Header: 'DSR',
