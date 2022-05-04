@@ -6,8 +6,7 @@ import { FixedSizeList } from 'react-window'
 import scrollbarWidth from '../utils/scrollbarWidth';
 import { ArrowDown, ArrowUp } from '../utils/icons'
 import TableLayout from './Layout/TableLayout'
-import useLocalData, { handleSave, handleLoad } from '../utils/useLocalData'
-import { Toaster } from 'react-hot-toast';
+import useLocalData from '../utils/useLocalData'
 import TableHeaderLayout from './Layout/TableHeaderLayout'
 import { LoadColumnButton, SaveColumnButton } from './SaveColumnButton'
 
@@ -126,7 +125,7 @@ const DataTable = () => {
 
           <div {...getTableBodyProps()} className="divide-y divide-gray-200 bg-white">
             <FixedSizeList
-              height={500}
+              height={1000}
               itemCount={rows.length}
               itemSize={50}
               width={totalColumnsWidth + scrollBarSize}
